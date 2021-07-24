@@ -1,19 +1,33 @@
 import React from 'react';
+import Card from '../UI/Card';
 
 import ExpenseDate from './ExpenseDate';
 import './ExpenseItem.css';
-import Card from '../UI/Card';
 
-const ExpenseItem = (props) => {
-
-  return (
-  <Card className="expense-item"> 
-    <ExpenseDate date={props.date}/>
+const ExpenseItem = ({
+  id,
+  title,
+  amount,
+  location,
+  date,
+  onDelete
+}) => (
+  <Card className="expense-item">
+    <ExpenseDate date={date}/>
     <div className="expense-item__description">
-      <h2>{props.title}</h2>
-      <div className="expense-item__price">£{props.amount}</div>
+      <div className="expense-item__info">
+        <h2>{title}</h2>
+        <p>{location}</p>
+      </div>
+      <div className="expense-item__price">
+        £{parseFloat(amount).toFixed(2)}
+      </div>
+      <div className="expense-item__delete">
+        <button onClick={() => onDelete(id)}>X</button>
+      </div>
     </div>
-  </Card>); 
-}
+  </Card>
+);
+
 
 export default ExpenseItem;

@@ -1,41 +1,29 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Card from '../UI/Card';
 import ExpenseItem from './ExpenseItem';
 import ExpensesFilter from './ExpensesFilter';
 import './Expenses.css';
 
-const Expenses = (props) => {
+const Expenses = ({
+  items,
+  onDeleteExpense
+}) => {
   const [filteredYear, setFilteredYear] = useState('2021');
 
-  const filterChangeHandler = selectedYear => {
-    setFilteredYear(selectedYear);
+  const expenseDeleteHandler = (id) => {
+    onDeleteExpense(id)
   }
+
   return (
     <Card className="expenses">
-      <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-      <ExpenseItem 
-        title={props.items[0].title} 
-        amount={props.items[0].amount} 
-        date={props.items[0].date}
-      />
-      <ExpenseItem 
-        title={props.items[1].title} 
-        amount={props.items[1].amount} 
-        date={props.items[1].date}
-      />
-      <ExpenseItem 
-        title={props.items[2].title} 
-        amount={props.items[2].amount} 
-        date={props.items[2].date}
-      />
-      <ExpenseItem 
-        title={props.items[3].title} 
-        amount={props.items[3].amount} 
-        date={props.items[3].date}
-      />
+      <ExpensesFilter selected={filteredYear} onChangeFilter={setFilteredYear}/>
+      {items
+        .filter(item => item.date.getFullYear() === parseInt(filteredYear))
+        .map(({ id, title, amount, date, location }, key) => <ExpenseItem {...{ key, id, title, amount, date, location }} onDelete={expenseDeleteHandler} />)
+      }
     </Card>
   );
-}
+};
 
 export default Expenses;

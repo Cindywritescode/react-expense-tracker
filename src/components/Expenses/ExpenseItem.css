@@ -17,12 +17,16 @@
   flex: 1;
 }
 
-.expense-item h2 {
+.expense-item__info {
   color: #3a3a3a;
   font-size: 1rem;
   flex: 1;
   margin: 0 1rem;
   color: white;
+}
+
+.expense-item__info p {
+  color: #111;
 }
 
 .expense-item__price {
@@ -33,6 +37,15 @@
   border: 1px solid white;
   padding: 0.5rem;
   border-radius: 12px;
+}
+
+.expense-item__delete button {
+  border-radius: 50%;
+  border: none;
+  width: 3em;
+  height: 3em;
+  background-color: #2a2a2a;
+  color: #fff;
 }
 
 @media (min-width: 580px) {
